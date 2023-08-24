@@ -8,7 +8,7 @@ using ImmutableArrays
     @testset "tests for $(typeof(x))" for x in [arr, view]
         immarr = ImmutableArray(x)
 
-        @test all(splat(==), zip(immarr, x))
+        @test all(Base.splat(==), zip(immarr, x))
         @test parent(immarr) === x
 
         @testset "AbstractArray interface" begin
