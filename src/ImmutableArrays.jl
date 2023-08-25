@@ -8,6 +8,8 @@ struct ImmutableArray{T,N,A<:AbstractArray{T,N}} <: AbstractArray{T,N}
     ImmutableArray(parent::A) where {T,N,A<:AbstractArray{T,N}} = new{T,N,A}(parent)
 end
 
+ImmutableArray(tuple::Tuple) = convert(ImmutableVector, tuple)
+
 const ImmutableVector{T,A} = ImmutableArray{T,1,A}
 const ImmutableMatrix{T,A} = ImmutableArray{T,2,A}
 
@@ -26,5 +28,9 @@ Base.convert(::Type{ImmutableArray{T,N,A}}, arr::A) where {T,N,A<:AbstractArray{
 Base.convert(::Type{ImmutableArray{T,N}}, arr::A) where {T,N,A<:AbstractArray{T,N}} = ImmutableArray(arr)
 Base.convert(::Type{ImmutableArray{T}}, arr::A) where {T,A<:AbstractArray{T}} = ImmutableArray(arr)
 Base.convert(::Type{ImmutableArray}, arr::A) where {A<:AbstractArray} = ImmutableArray(arr)
+
+Base.convert(::Type{ImmutableVector}, tuple::Tuple) = tuple |> collect |> ImmutableArray
+Base.convert(::Type{ImmutableVector{T}}, tuple::NTuple{N,T} where {N}) where {T} = tuple |> collect |> ImmutableArray
+Base.convert(::Type{ImmutableVector{T,A}}, tuple::NTuple{N,T} where {N}) where {T,A} = tuple |> collect |> A |> ImmutableArray
 
 end
