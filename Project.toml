@@ -1,4 +1,4 @@
 name = "ImmutableArrays"
 uuid = "667c17eb-ab9b-4487-935f-1c621bb82497"
 authors = ["Sergio Sánchez Ramírez <sergio.sanchez.ramirez+git@bsc.es>"]
-version = "1.0.0"
+version = "1.0.1"
