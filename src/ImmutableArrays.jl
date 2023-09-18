@@ -9,6 +9,7 @@ struct ImmutableArray{T,N,A<:AbstractArray{T,N}} <: AbstractArray{T,N}
 end
 
 ImmutableArray(tuple::Tuple) = convert(ImmutableVector, tuple)
+ImmutableArray(other::ImmutableArray) = other
 
 const ImmutableVector{T,A} = ImmutableArray{T,1,A}
 const ImmutableMatrix{T,A} = ImmutableArray{T,2,A}

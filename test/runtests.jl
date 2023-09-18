@@ -12,6 +12,10 @@ using ImmutableArrays
         @test all(Base.splat(==), zip(immarr, x))
         @test parent(immarr) === x
 
+        @testset "ImmutableArray(::ImmutableArray)" begin
+            @test ImmutableArray(immarr) === immarr
+        end
+
         @testset "AbstractArray interface" begin
             @testset "$f" for f in [size, axes]
                 @test f(immarr) == f(x)
